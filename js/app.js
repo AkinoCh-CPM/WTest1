@@ -257,3 +257,56 @@ const opacity = (nama) => {
         }
     }, 10);
 };
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD4sgRYUhk08Y4oZPR4GXJbSuX1fHjXBtg",
+  authDomain: "akinowedding-73271.firebaseapp.com",
+  projectId: "akinowedding-73271",
+  storageBucket: "akinowedding-73271.appspot.com",
+  messagingSenderId: "307666594440",
+  appId: "1:307666594440:web:e7d3496744464f4c6d0d3d",
+  measurementId: "G-HL4YHXR22B"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function addMessage() {
+  const name = document.getElementById('name').value;
+  const message = document.getElementById('message').value;
+  try {
+    await addDoc(collection(db, "messages"), {
+      name: name,
+      message: message,
+      timestamp: new Date()
+    });
+    alert("Ucapan berhasil dikirim!");
+    document.getElementById('name').value = '';
+    document.getElementById('message').value = '';
+    displayMessages();
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+}
+
+async function addMessage() {
+  const name = document.getElementById('name').value;
+  const message = document.getElementById('message').value;
+  console.log("Adding message:", name, message);
+  try {
+    await addDoc(collection(db, "messages"), {
+      name: name,
+      message: message,
+      timestamp: new Date()
+    });
+    alert("Ucapan berhasil dikirim!");
+    document.getElementById('name').value = '';
+    document.getElementById('message').value = '';
+    displayMessages();
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+}
